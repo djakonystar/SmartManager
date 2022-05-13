@@ -49,7 +49,6 @@ dependencies {
     def nav_version = "2.4.2"
     // Kotlin
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
 
     def koin_version = "3.2.0"
     // Koin main features for Android
@@ -73,7 +72,7 @@ dependencies {
     def rxjava_version = "3.0.2"
     // RxJava
     implementation "io.reactivex.rxjava3:rxjava:$rxjava_version"
-    implementation "io.reactivex.rxjava3:rxandroid:$rxjava_version"
+    implementation "io.reactivex.rxjava3:rxandroid:3.0.0"
 
     def lifecycle_version = "2.4.1"
     // LiveData and ViewModel
@@ -82,4 +81,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
     //noinspection LifecycleAnnotationProcessorWithJava8
     kapt 'androidx.lifecycle:lifecycle-compiler:2.4.1'
+
+    // LottieAnimation
+    implementation "com.airbnb.android:lottie:3.7.0"
 }

@@ -14,7 +14,7 @@ interface ApiInterface {
     @POST("/auth/login")
     fun signIn(
         @Body signIn: SignIn
-    ): Response<Observable<GenericResponse<String?>>>
+    ): Observable<Response<GenericResponse<String?>>>
 
     @PUT("/bot/editTime")
     fun editTime(

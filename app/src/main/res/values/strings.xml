@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">SmartManager</string>
+    <string name="username">Username</string>
+    <string name="symbol_at">\@</string>
+    <string name="password">Parol</string>
+    <string name="sign_in">Kiriw</string>
+    <string name="yes">Awa</string>
+    <string name="cancel">Biykarlaw</string>
+    <string name="warning">Isenimińiz kámil me?</string>
+    <string name="error">Qátelik</string>
+    <string name="close">Jabıw</string>
+    <string name="success">Tabıslı!</string>
+    <string name="required_field">Toltırılıwı shárt</string>
 </resources>

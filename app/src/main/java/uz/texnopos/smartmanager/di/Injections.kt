@@ -5,10 +5,14 @@ import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import uz.texnopos.smartmanager.data.remote.ApiInterface
 import uz.texnopos.smartmanager.settings.Settings
+import uz.texnopos.smartmanager.ui.signin.SignInViewModel
 import java.util.concurrent.TimeUnit
 
 private const val baseUrl = "http://smartshop24.uz"
@@ -40,6 +44,10 @@ val networkModule = module {
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .build()
     }
+
+    single {
+        get<Retrofit>().create(ApiInterface::class.java)
+    }
 }
 
 val helperModule = module {
@@ -47,7 +55,7 @@ val helperModule = module {
 }
 
 val viewModelModule = module {
-
+    viewModelOf(::SignInViewModel)
 }
 
 val adapterModule = module {
