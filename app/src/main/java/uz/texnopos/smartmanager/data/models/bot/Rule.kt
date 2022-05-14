@@ -6,5 +6,7 @@ data class Rule(
     val endHour: String,
     val startMinute: String,
     val endMinute: String,
-    val chatId: String
+    val chatId: String,
+    val sendHour: String,
+    val sendMinute: String
 )

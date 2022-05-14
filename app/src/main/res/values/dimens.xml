@@ -9,4 +9,5 @@
     <dimen name="button_height">64dp</dimen>
     <dimen name="margin_4">4dp</dimen>
     <dimen name="text_size_16">16dp</dimen>
+    <dimen name="image_size_action_bar">32dp</dimen>
 </resources>

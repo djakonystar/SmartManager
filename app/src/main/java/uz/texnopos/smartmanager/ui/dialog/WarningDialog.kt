@@ -19,6 +19,7 @@ class WarningDialog(private val message: String) : DialogFragment(R.layout.dialo
         savedInstanceState: Bundle?
     ): View? {
         dialog!!.window?.setBackgroundDrawableResource(R.drawable.shape_dialog)
+        dialog!!.setCanceledOnTouchOutside(false)
         return inflater.inflate(R.layout.dialog_warning, container, false)
     }
 

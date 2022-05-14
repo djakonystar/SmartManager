@@ -27,15 +27,10 @@ class SignInViewModel(private val api: ApiInterface, application: Application) :
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     { response ->
-                        if (response.isSuccessful) {
-                            mutableSignIn.value = Resource.success(response.body()?.data)
+                        if (response.success) {
+                            mutableSignIn.value = Resource.success(response.data!!)
                         } else {
-                            if (response.code() == 401) {
-                                // todo: Unauthorized
-                                mutableSignIn.value = Resource.error(response.message())
-                            } else {
-                                mutableSignIn.value = Resource.error(response.message())
-                            }
+                            mutableSignIn.value = Resource.error(response.message)
                         }
                     },
                     { error ->

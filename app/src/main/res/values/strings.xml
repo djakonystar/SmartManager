@@ -11,4 +11,12 @@
     <string name="close">Jabıw</string>
     <string name="success">Tabıslı!</string>
     <string name="required_field">Toltırılıwı shárt</string>
+    <string name="reports">Esabatlar</string>
+    <string name="date_duration">%s - %s</string>
+    <string name="admins">Adminlar</string>
+    <string name="settings">Sazlamalar</string>
+    <string name="supervisors">Supervisorlar</string>
+    <string name="all_supervisors">Bárshe supervisorlar</string>
+    <string name="full_name">%s %s</string>
+    <string name="choose_range">Aralıqtı saylań</string>
 </resources>

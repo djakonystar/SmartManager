@@ -58,7 +58,9 @@ class SignInFragment : Fragment(R.layout.fragment_signin) {
     private fun setLoading(loading: Boolean) {
         binding.apply {
             progressCircular.isVisible = loading
-            cardView.isEnabled = !loading
+            tilUsername.isEnabled = !loading
+            tilPassword.isEnabled = !loading
+            btnSignIn.isEnabled = !loading
         }
     }
 
@@ -71,7 +73,7 @@ class SignInFragment : Fragment(R.layout.fragment_signin) {
                     it.data?.let { token ->
                         settings.token = token
                         settings.signedIn = true
-                        showMessage("Login success!")
+                        navController.navigate(R.id.action_signInFragment_to_mainFragment)
                         TODO("navigate to main")
                     }
                 }

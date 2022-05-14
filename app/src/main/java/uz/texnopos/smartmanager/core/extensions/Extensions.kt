@@ -26,6 +26,8 @@ import com.google.android.material.snackbar.Snackbar
 import uz.texnopos.smartmanager.ui.dialog.SuccessDialog
 import uz.texnopos.smartmanager.ui.dialog.WarningDialog
 import uz.texnopos.smartmanager.ui.dialog.ErrorDialog
+import java.text.SimpleDateFormat
+import java.util.*
 
 fun Fragment.showMessage(msg: String?) {
     Toast.makeText(this.requireContext(), msg, Toast.LENGTH_LONG).show()
@@ -191,9 +193,6 @@ val String.toPhoneNumber: String
         return phone
     }
 
-/**
- * Change date format from _yyyy-MM-dd_ to _dd.MM.yyyy_ and vice versa
- */
 val String.changeDateFormat: String
     get() {
         val day: String
@@ -208,8 +207,18 @@ val String.changeDateFormat: String
             day = this.substring(0..1)
             month = this.substring(3..4)
             year = this.substring(6..9)
-            "$year-$month-$day"
+            "$day/$month/$year"
         }
+    }
+
+val String.parseDate: String
+    get() {
+        val date = this
+        val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX", Locale.ROOT)
+        val result = sdf.parse(date)
+        val newSdf = SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.ROOT)
+        newSdf.timeZone = TimeZone.getTimeZone("GMT+5:00")
+        return newSdf.format(result ?: "")
     }
 
 val EditText.filterForDouble: Unit
