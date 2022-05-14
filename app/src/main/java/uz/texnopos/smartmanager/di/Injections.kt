@@ -13,6 +13,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import uz.texnopos.smartmanager.data.remote.ApiInterface
 import uz.texnopos.smartmanager.settings.Settings
+import uz.texnopos.smartmanager.ui.admin.AdminAdapter
+import uz.texnopos.smartmanager.ui.admin.AdminViewModel
 import uz.texnopos.smartmanager.ui.report.ReportAdapter
 import uz.texnopos.smartmanager.ui.report.ReportViewModel
 import uz.texnopos.smartmanager.ui.signin.SignInViewModel
@@ -60,8 +62,10 @@ val helperModule = module {
 val viewModelModule = module {
     viewModelOf(::SignInViewModel)
     viewModelOf(::ReportViewModel)
+    viewModelOf(::AdminViewModel)
 }
 
 val adapterModule = module {
     singleOf(::ReportAdapter)
+    singleOf(::AdminAdapter)
 }

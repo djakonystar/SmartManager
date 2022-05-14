@@ -9,4 +9,14 @@
         android:name="uz.texnopos.smartmanager.ui.report.ReportFragment"
         android:label="fragment_report"
         tools:layout="@layout/fragment_report" />
+    <fragment
+        android:id="@+id/adminFragment"
+        android:name="uz.texnopos.smartmanager.ui.admin.AdminFragment"
+        android:label="fragment_admin"
+        tools:layout="@layout/fragment_admin" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="uz.texnopos.smartmanager.ui.settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>

@@ -19,4 +19,13 @@
     <string name="all_supervisors">Bárshe supervisorlar</string>
     <string name="full_name">%s %s</string>
     <string name="choose_range">Aralıqtı saylań</string>
+    <string name="admin_delete_message">Siz rastan da %sni adminler qatarınan óshirmekshisiz be?</string>
+    <string name="admin_edited_successfully">Admin maǵlıwmatları tabıslı ózgertildi!</string>
+    <string name="admin_deleted_successfully">Admin tabıslı óshirildi!</string>
+    <string name="admin_added_successfully">Admin tabıslı qosıldı!</string>
+    <string name="edit">Maǵlıwmatlardı ózgertiw</string>
+    <string name="firstname">At</string>
+    <string name="lastname">Familiya</string>
+    <string name="save">Saqlaw</string>
+    <string name="add">Qosıw</string>
 </resources>

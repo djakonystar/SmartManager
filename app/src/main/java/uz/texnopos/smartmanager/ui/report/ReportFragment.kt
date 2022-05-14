@@ -108,7 +108,7 @@ class ReportFragment : Fragment(R.layout.fragment_report) {
             progressCircular.isVisible = loading
             tilSupervisor.isEnabled = !loading
             swipeRefresh.isEnabled = !loading
-            recyclerView.isClickable = !loading
+            recyclerView.isEnabled = !loading
             fabDatePicker.isEnabled = !loading
         }
     }

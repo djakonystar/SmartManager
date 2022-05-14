@@ -31,6 +31,10 @@ class SignInFragment : Fragment(R.layout.fragment_signin) {
         binding = FragmentSigninBinding.bind(view)
         navController = findNavController()
 
+        if (settings.signedIn) {
+            navController.navigate(R.id.action_signInFragment_to_mainFragment)
+        }
+
         binding.apply {
             etUsername.addTextChangedListener { tilUsername.isErrorEnabled = false }
             etPassword.addTextChangedListener { tilPassword.isErrorEnabled = false }

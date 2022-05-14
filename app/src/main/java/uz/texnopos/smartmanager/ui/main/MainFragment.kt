@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import uz.texnopos.smartmanager.R
 import uz.texnopos.smartmanager.databinding.FragmentMainBinding
@@ -17,7 +18,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentMainBinding.bind(view)
-        childNavController = Navigation.findNavController(binding.mainNavHostFragment)
+        childNavController =
+            Navigation.findNavController(requireActivity(), R.id.main_nav_host_fragment)
 
         binding.apply {
             bottomNav.setupWithNavController(childNavController)
