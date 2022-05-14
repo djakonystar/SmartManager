@@ -1,15 +1,14 @@
 package uz.texnopos.smartmanager.data.remote
 
 import io.reactivex.rxjava3.core.Observable
-import retrofit2.Response
 import retrofit2.http.*
 import uz.texnopos.smartmanager.data.models.GenericResponse
 import uz.texnopos.smartmanager.data.models.bot.EditChatId
 import uz.texnopos.smartmanager.data.models.bot.EditTime
 import uz.texnopos.smartmanager.data.models.bot.Rule
 import uz.texnopos.smartmanager.data.models.report.Report
-import uz.texnopos.smartmanager.data.models.report.ReportDate
 import uz.texnopos.smartmanager.data.models.signin.SignIn
+import uz.texnopos.smartmanager.data.models.signin.SignInPost
 import uz.texnopos.smartmanager.data.models.user.Admin
 import uz.texnopos.smartmanager.data.models.user.AdminPost
 import uz.texnopos.smartmanager.data.models.user.Supervisor
@@ -17,8 +16,8 @@ import uz.texnopos.smartmanager.data.models.user.Supervisor
 interface ApiInterface {
     @POST("/auth/login")
     fun signIn(
-        @Body signIn: SignIn
-    ): Observable<GenericResponse<String?>>
+        @Body signIn: SignInPost
+    ): Observable<GenericResponse<SignIn>>
 
     @PUT("/bot/editTime")
     fun editTime(

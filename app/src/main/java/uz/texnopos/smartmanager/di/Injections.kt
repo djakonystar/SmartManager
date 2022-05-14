@@ -17,6 +17,7 @@ import uz.texnopos.smartmanager.ui.admin.AdminAdapter
 import uz.texnopos.smartmanager.ui.admin.AdminViewModel
 import uz.texnopos.smartmanager.ui.report.ReportAdapter
 import uz.texnopos.smartmanager.ui.report.ReportViewModel
+import uz.texnopos.smartmanager.ui.settings.SettingsViewModel
 import uz.texnopos.smartmanager.ui.signin.SignInViewModel
 import java.util.concurrent.TimeUnit
 
@@ -63,6 +64,7 @@ val viewModelModule = module {
     viewModelOf(::SignInViewModel)
     viewModelOf(::ReportViewModel)
     viewModelOf(::AdminViewModel)
+    viewModelOf(::SettingsViewModel)
 }
 
 val adapterModule = module {

@@ -88,4 +88,9 @@ class ReportViewModel(private val api: ApiInterface, private val settings: Setti
                 )
         )
     }
+
+    override fun onCleared() {
+        compositeDisposable.clear()
+        super.onCleared()
+    }
 }

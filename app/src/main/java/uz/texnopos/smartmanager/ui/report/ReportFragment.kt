@@ -103,6 +103,11 @@ class ReportFragment : Fragment(R.layout.fragment_report) {
         setUpObservers()
     }
 
+    override fun onDetach() {
+        adapter.models = listOf()
+        super.onDetach()
+    }
+
     private fun setLoading(loading: Boolean) {
         binding.apply {
             progressCircular.isVisible = loading

@@ -40,6 +40,24 @@ class AdminFragment : Fragment(R.layout.fragment_admin) {
                 editAdminDialog = EditAdminDialog(admin)
                 editAdminDialog.setOnPositiveButtonClickListener { adminPost ->
                     viewModel.editAdmin(admin.id, adminPost)
+
+                    viewModel.editAdmin.observe(viewLifecycleOwner) {
+                        when (it.status) {
+                            ResourceState.LOADING -> setLoading(true)
+                            ResourceState.SUCCESS -> {
+                                setLoading(false)
+                                showSuccess(getString(R.string.admin_edited_successfully))
+                                    .setOnDismissListener {
+                                        editAdminDialog.dismiss()
+                                        viewModel.getAdmins()
+                                    }
+                            }
+                            ResourceState.ERROR -> {
+                                setLoading(false)
+                                showError(it.message)
+                            }
+                        }
+                    }
                 }
                 editAdminDialog.show(requireActivity().supportFragmentManager, editAdminDialog.tag)
             }
@@ -48,6 +66,23 @@ class AdminFragment : Fragment(R.layout.fragment_admin) {
                 showWarning(getString(R.string.admin_delete_message, admin.username))
                     .setOnPositiveButtonClickListener {
                         viewModel.deleteAdmin(admin.id)
+
+                        viewModel.deleteAdmin.observe(viewLifecycleOwner) {
+                            when (it.status) {
+                                ResourceState.LOADING -> setLoading(true)
+                                ResourceState.SUCCESS -> {
+                                    setLoading(false)
+                                    showSuccess(getString(R.string.admin_deleted_successfully))
+                                        .setOnDismissListener {
+                                            viewModel.getAdmins()
+                                        }
+                                }
+                                ResourceState.ERROR -> {
+                                    setLoading(false)
+                                    showError(it.message)
+                                }
+                            }
+                        }
                     }
             }
 
@@ -56,6 +91,24 @@ class AdminFragment : Fragment(R.layout.fragment_admin) {
                 addAdminDialog.show(requireActivity().supportFragmentManager, addAdminDialog.tag)
                 addAdminDialog.setOnPositiveButtonClickListener { adminPost ->
                     viewModel.addAdmin(adminPost)
+
+                    viewModel.addAdmin.observe(viewLifecycleOwner) {
+                        when (it.status) {
+                            ResourceState.LOADING -> setLoading(true)
+                            ResourceState.SUCCESS -> {
+                                setLoading(false)
+                                showSuccess(getString(R.string.admin_added_successfully))
+                                    .setOnDismissListener {
+                                        addAdminDialog.dismiss()
+                                        viewModel.getAdmins()
+                                    }
+                            }
+                            ResourceState.ERROR -> {
+                                setLoading(false)
+                                showError(it.message)
+                            }
+                        }
+                    }
                 }
                 addAdminDialog.setOnDismissListener { fabAddAdmin.isEnabled = true }
             }
@@ -63,6 +116,11 @@ class AdminFragment : Fragment(R.layout.fragment_admin) {
 
         viewModel.getAdmins()
         setUpObservers()
+    }
+
+    override fun onDetach() {
+        adapter.models = listOf()
+        super.onDetach()
     }
 
     private fun setLoading(loading: Boolean) {
@@ -83,59 +141,6 @@ class AdminFragment : Fragment(R.layout.fragment_admin) {
                     it.data?.let { admins ->
                         adapter.models = admins
                     }
-                }
-                ResourceState.ERROR -> {
-                    setLoading(false)
-                    showError(it.message)
-                }
-            }
-        }
-
-        viewModel.addAdmin.observe(viewLifecycleOwner) {
-            when (it.status) {
-                ResourceState.LOADING -> setLoading(true)
-                ResourceState.SUCCESS -> {
-                    setLoading(false)
-                    showSuccess(getString(R.string.admin_added_successfully))
-                        .setOnDismissListener {
-                            addAdminDialog.dismiss()
-                            viewModel.getAdmins()
-                        }
-                }
-                ResourceState.ERROR -> {
-                    setLoading(false)
-                    showError(it.message)
-                }
-            }
-        }
-
-        viewModel.editAdmin.observe(viewLifecycleOwner) {
-            when (it.status) {
-                ResourceState.LOADING -> setLoading(true)
-                ResourceState.SUCCESS -> {
-                    setLoading(false)
-                    showSuccess(getString(R.string.admin_edited_successfully))
-                        .setOnDismissListener {
-                            editAdminDialog.dismiss()
-                            viewModel.getAdmins()
-                        }
-                }
-                ResourceState.ERROR -> {
-                    setLoading(false)
-                    showError(it.message)
-                }
-            }
-        }
-
-        viewModel.deleteAdmin.observe(viewLifecycleOwner) {
-            when (it.status) {
-                ResourceState.LOADING -> setLoading(true)
-                ResourceState.SUCCESS -> {
-                    setLoading(false)
-                    showSuccess(getString(R.string.admin_deleted_successfully))
-                        .setOnDismissListener {
-                            viewModel.getAdmins()
-                        }
                 }
                 ResourceState.ERROR -> {
                     setLoading(false)

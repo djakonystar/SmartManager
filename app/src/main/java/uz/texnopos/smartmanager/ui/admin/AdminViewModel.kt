@@ -110,4 +110,9 @@ class AdminViewModel(private val api: ApiInterface, private val settings: Settin
                 )
         )
     }
+
+    override fun onCleared() {
+        compositeDisposable.clear()
+        super.onCleared()
+    }
 }

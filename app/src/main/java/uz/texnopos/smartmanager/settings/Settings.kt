@@ -7,6 +7,7 @@ class Settings(context: Context) {
     companion object {
         private const val TOKEN = "token"
         private const val SIGNED_IN = "signedIn"
+        private const val ROLE = "role"
     }
 
     private val preferences: SharedPreferences =
@@ -20,4 +21,7 @@ class Settings(context: Context) {
         set(value) = preferences.edit().putBoolean(SIGNED_IN, value).apply()
         get() = preferences.getBoolean(SIGNED_IN, false)
 
+    var role: String
+        set(value) = preferences.edit().putString(ROLE, value).apply()
+        get() = preferences.getString(ROLE, "") ?: ""
 }

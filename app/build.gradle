@@ -91,4 +91,7 @@ dependencies {
 
     // SwipeRefreshLayout
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
+    // JWT
+    implementation 'com.auth0.android:jwtdecode:2.0.1'
 }
