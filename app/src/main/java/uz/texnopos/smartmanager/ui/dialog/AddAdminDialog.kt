@@ -9,7 +9,6 @@ import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.DialogFragment
 import uz.texnopos.smartmanager.R
 import uz.texnopos.smartmanager.core.extensions.onClick
-import uz.texnopos.smartmanager.data.models.user.Admin
 import uz.texnopos.smartmanager.data.models.user.AdminPost
 import uz.texnopos.smartmanager.databinding.DialogAdminBinding
 

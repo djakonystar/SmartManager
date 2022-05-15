@@ -1,6 +1,5 @@
 package uz.texnopos.smartmanager.ui.dialog
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -42,18 +41,8 @@ class WarningDialog(private val message: String) : DialogFragment(R.layout.dialo
         }
     }
 
-    override fun onDismiss(dialog: DialogInterface) {
-        super.onDismiss(dialog)
-        onDismiss.invoke()
-    }
-
     private var onPositiveButtonClick: () -> Unit = {}
     fun setOnPositiveButtonClickListener(onPositiveButtonClick: () -> Unit) {
         this.onPositiveButtonClick = onPositiveButtonClick
-    }
-
-    private var onDismiss: () -> Unit = {}
-    fun setOnDismissListener(onDismiss: () -> Unit) {
-        this.onDismiss = onDismiss
     }
 }

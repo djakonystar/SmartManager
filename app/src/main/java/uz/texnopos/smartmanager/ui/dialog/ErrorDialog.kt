@@ -1,6 +1,5 @@
 package uz.texnopos.smartmanager.ui.dialog
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -34,15 +33,5 @@ class ErrorDialog(private val message: String) : DialogFragment(R.layout.dialog_
                 dismiss()
             }
         }
-    }
-
-    override fun onDismiss(dialog: DialogInterface) {
-        super.onDismiss(dialog)
-        onDismiss.invoke()
-    }
-
-    private var onDismiss: () -> Unit = {}
-    fun setOnDismissListener(onDismiss: () -> Unit) {
-        this.onDismiss = onDismiss
     }
 }

@@ -100,6 +100,20 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
             ivApplyDate.onClick {
                 viewModel.editTime(EditTime(startHour, endHour, startMinute, endMinute))
+
+                viewModel.editTime.observe(viewLifecycleOwner) {
+                    when (it.status) {
+                        ResourceState.LOADING -> setLoading(true)
+                        ResourceState.SUCCESS -> {
+                            setLoading(false)
+                            showSuccess(getString(R.string.time_range_setted_successfully))
+                        }
+                        ResourceState.ERROR -> {
+                            setLoading(false)
+                            showError(it.message)
+                        }
+                    }
+                }
             }
 
             etChatId.addTextChangedListener {
@@ -111,6 +125,20 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
 
                 if (chatId.isNotEmpty()) {
                     viewModel.editChatId(EditChatId(chatId))
+
+                    viewModel.editChatId.observe(viewLifecycleOwner) {
+                        when (it.status) {
+                            ResourceState.LOADING -> setLoading(true)
+                            ResourceState.SUCCESS -> {
+                                setLoading(false)
+                                showSuccess(getString(R.string.chat_id_setted_successfully))
+                            }
+                            ResourceState.ERROR -> {
+                                setLoading(false)
+                                showError(it.message)
+                            }
+                        }
+                    }
                 } else {
                     tilChatId.error = getString(R.string.required_field)
                 }
@@ -161,34 +189,6 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                             )
                         }
                     }
-                }
-                ResourceState.ERROR -> {
-                    setLoading(false)
-                    showError(it.message)
-                }
-            }
-        }
-
-        viewModel.editTime.observe(viewLifecycleOwner) {
-            when (it.status) {
-                ResourceState.LOADING -> setLoading(true)
-                ResourceState.SUCCESS -> {
-                    setLoading(false)
-                    showSuccess(getString(R.string.time_range_setted_successfully))
-                }
-                ResourceState.ERROR -> {
-                    setLoading(false)
-                    showError(it.message)
-                }
-            }
-        }
-
-        viewModel.editChatId.observe(viewLifecycleOwner) {
-            when (it.status) {
-                ResourceState.LOADING -> setLoading(true)
-                ResourceState.SUCCESS -> {
-                    setLoading(false)
-                    showSuccess(getString(R.string.chat_id_setted_successfully))
                 }
                 ResourceState.ERROR -> {
                     setLoading(false)

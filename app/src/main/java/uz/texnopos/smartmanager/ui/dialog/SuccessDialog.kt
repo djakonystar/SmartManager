@@ -31,7 +31,6 @@ class SuccessDialog(private val message: String) : DialogFragment(R.layout.dialo
             tvMessage.text = message
 
             btnClose.onClick {
-                onPositiveButtonClick.invoke()
                 dismiss()
             }
         }
@@ -40,11 +39,6 @@ class SuccessDialog(private val message: String) : DialogFragment(R.layout.dialo
     override fun onDismiss(dialog: DialogInterface) {
         super.onDismiss(dialog)
         onDismiss.invoke()
-    }
-
-    private var onPositiveButtonClick: () -> Unit = {}
-    fun setOnPositiveButtonClickListener(onPositiveButtonClick: () -> Unit) {
-        this.onPositiveButtonClick = onPositiveButtonClick
     }
 
     private var onDismiss: () -> Unit = {}

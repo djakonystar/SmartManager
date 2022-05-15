@@ -1,6 +1,5 @@
 package uz.texnopos.smartmanager.ui.dialog
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -88,18 +87,8 @@ class EditAdminDialog(private val admin: Admin) : DialogFragment() {
         }
     }
 
-    override fun onDismiss(dialog: DialogInterface) {
-        onDismiss()
-        super.onDismiss(dialog)
-    }
-
     private var onPositiveButtonClick: (admin: AdminPost) -> Unit = {}
     fun setOnPositiveButtonClickListener(onPositiveButtonClick: (admin: AdminPost) -> Unit) {
         this.onPositiveButtonClick = onPositiveButtonClick
-    }
-
-    private var onDismiss: () -> Unit = {}
-    fun setOnDismissListener(onDismiss: () -> Unit) {
-        this.onDismiss = onDismiss
     }
 }

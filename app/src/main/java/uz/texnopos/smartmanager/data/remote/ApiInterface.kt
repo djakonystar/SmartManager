@@ -41,11 +41,6 @@ interface ApiInterface {
         @Header("Authorization") token: String,
     ): Observable<GenericResponse<List<Supervisor>>>
 
-    @GET("/bot/getAllReport")
-    fun getAllReports(
-        @Header("Authorization") token: String
-    ): Observable<GenericResponse<List<Report>>>
-
     @GET("/bot/byDate")
     fun getReportsByDate(
         @Header("Authorization") token: String,

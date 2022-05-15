@@ -4,8 +4,6 @@ import com.google.gson.GsonBuilder
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.android.ext.koin.androidApplication
-import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
