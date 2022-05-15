@@ -6,6 +6,17 @@
     android:layout_height="match_parent"
     tools:context=".ui.signin.SignInFragment">
 
+    <ImageView
+        android:id="@+id/iv_logotype"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginBottom="@dimen/margin_16"
+        android:src="@drawable/smartmanager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/card_view"
+        tools:ignore="ContentDescription" />
+
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view"
         android:layout_width="match_parent"
@@ -83,10 +94,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:elevation="@dimen/elevation_6"
+        android:indeterminate="true"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:trackCornerRadius="@dimen/corner_radius_8" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

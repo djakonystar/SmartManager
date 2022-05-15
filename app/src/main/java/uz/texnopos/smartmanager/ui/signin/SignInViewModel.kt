@@ -9,6 +9,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import uz.texnopos.smartmanager.core.utils.Resource
 import uz.texnopos.smartmanager.data.models.signin.SignIn
+import uz.texnopos.smartmanager.data.models.signin.SignInPost
 import uz.texnopos.smartmanager.data.remote.ApiInterface
 
 class SignInViewModel(private val api: ApiInterface, application: Application) :
@@ -16,10 +17,10 @@ class SignInViewModel(private val api: ApiInterface, application: Application) :
 
     private val compositeDisposable = CompositeDisposable()
 
-    private var mutableSignIn: MutableLiveData<Resource<String?>> = MutableLiveData()
-    val signIn: LiveData<Resource<String?>> = mutableSignIn
+    private var mutableSignIn: MutableLiveData<Resource<SignIn>> = MutableLiveData()
+    val signIn: LiveData<Resource<SignIn>> = mutableSignIn
 
-    fun signIn(signIn: SignIn) {
+    fun signIn(signIn: SignInPost) {
         mutableSignIn.value = Resource.loading()
         compositeDisposable.add(
             api.signIn(signIn)
@@ -27,15 +28,10 @@ class SignInViewModel(private val api: ApiInterface, application: Application) :
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     { response ->
-                        if (response.isSuccessful) {
-                            mutableSignIn.value = Resource.success(response.body()?.data)
+                        if (response.success) {
+                            mutableSignIn.value = Resource.success(response.data!!)
                         } else {
-                            if (response.code() == 401) {
-                                // todo: Unauthorized
-                                mutableSignIn.value = Resource.error(response.message())
-                            } else {
-                                mutableSignIn.value = Resource.error(response.message())
-                            }
+                            mutableSignIn.value = Resource.error(response.message)
                         }
                     },
                     { error ->
@@ -43,5 +39,10 @@ class SignInViewModel(private val api: ApiInterface, application: Application) :
                     }
                 )
         )
+    }
+
+    override fun onCleared() {
+        compositeDisposable.clear()
+        super.onCleared()
     }
 }

@@ -11,4 +11,32 @@
     <string name="close">Jabıw</string>
     <string name="success">Tabıslı!</string>
     <string name="required_field">Toltırılıwı shárt</string>
+    <string name="reports">Esabatlar</string>
+    <string name="date_duration">%s - %s</string>
+    <string name="admins">Adminlar</string>
+    <string name="settings">Sazlamalar</string>
+    <string name="supervisors">Supervisorlar</string>
+    <string name="all_supervisors">Bárshe supervisorlar</string>
+    <string name="full_name">%s %s</string>
+    <string name="time_range_template">%s:%s - %s:%s</string>
+    <string name="choose_range">Aralıqtı saylań</string>
+    <string name="admin_delete_message">Siz rastan da %sni adminler qatarınan óshirmekshisiz be?</string>
+    <string name="admin_edited_successfully">Admin maǵlıwmatları tabıslı ózgertildi!</string>
+    <string name="admin_deleted_successfully">Admin tabıslı óshirildi!</string>
+    <string name="admin_added_successfully">Admin tabıslı qosıldı!</string>
+    <string name="edit">Maǵlıwmatlardı ózgertiw</string>
+    <string name="firstname">At</string>
+    <string name="lastname">Familiya</string>
+    <string name="save">Saqlaw</string>
+    <string name="add">Qosıw</string>
+    <string name="time_range">Waqıt aralıǵı</string>
+    <string name="chat_id">Chat ID</string>
+    <string name="send_time_message">Kúnlik esabatlar jiberiletuǵın waqıt: %s:%s</string>
+    <string name="time_range_setted_successfully">Jańa waqıt aralıǵı tabıslı ornatıldı!</string>
+    <string name="chat_id_setted_successfully">Chat ID tabıslı ornatıldı!</string>
+    <string name="start_time">Baslanıw waqtı</string>
+    <string name="end_time">Juwmaqlanıw waqtı</string>
+    <string name="error_not_allowed">Sizge ruxsat etilmegen!</string>
+    <string name="mtrl_picker_confirm">Saqlaw</string>
+    <string name="mtrl_picker_cancel" translatable="false">Biykarlaw</string>
 </resources>

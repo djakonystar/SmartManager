@@ -5,8 +5,12 @@
     <dimen name="corner_radius_8">8dp</dimen>
     <dimen name="margin_8">8dp</dimen>
     <dimen name="padding_16">16dp</dimen>
-    <dimen name="dialog_sale_min_width_mobile">300dp</dimen>
+    <dimen name="dialog_sale_min_width_mobile">350dp</dimen>
     <dimen name="button_height">64dp</dimen>
     <dimen name="margin_4">4dp</dimen>
     <dimen name="text_size_16">16dp</dimen>
+    <dimen name="image_size_action_bar">32dp</dimen>
+    <dimen name="padding_4">4dp</dimen>
+    <dimen name="text_size_18">18dp</dimen>
+    <dimen name="text_size_20">20dp</dimen>
 </resources>

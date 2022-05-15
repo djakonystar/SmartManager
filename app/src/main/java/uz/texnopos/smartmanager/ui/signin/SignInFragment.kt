@@ -9,13 +9,11 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import org.koin.core.parameter.parametersOf
 import uz.texnopos.smartmanager.R
 import uz.texnopos.smartmanager.core.extensions.onClick
 import uz.texnopos.smartmanager.core.extensions.showError
-import uz.texnopos.smartmanager.core.extensions.showMessage
 import uz.texnopos.smartmanager.core.utils.ResourceState
-import uz.texnopos.smartmanager.data.models.signin.SignIn
+import uz.texnopos.smartmanager.data.models.signin.SignInPost
 import uz.texnopos.smartmanager.databinding.FragmentSigninBinding
 import uz.texnopos.smartmanager.settings.Settings
 
@@ -31,6 +29,10 @@ class SignInFragment : Fragment(R.layout.fragment_signin) {
         binding = FragmentSigninBinding.bind(view)
         navController = findNavController()
 
+        if (settings.signedIn) {
+            navController.navigate(R.id.action_signInFragment_to_mainFragment)
+        }
+
         binding.apply {
             etUsername.addTextChangedListener { tilUsername.isErrorEnabled = false }
             etPassword.addTextChangedListener { tilPassword.isErrorEnabled = false }
@@ -40,7 +42,7 @@ class SignInFragment : Fragment(R.layout.fragment_signin) {
                 val password = etPassword.text.toString()
 
                 if (username.isNotEmpty() && password.isNotEmpty()) {
-                    viewModel.signIn(SignIn(username, password))
+                    viewModel.signIn(SignInPost(username, password))
                 } else {
                     if (username.isEmpty()) {
                         tilUsername.error = getString(R.string.required_field)
@@ -58,7 +60,9 @@ class SignInFragment : Fragment(R.layout.fragment_signin) {
     private fun setLoading(loading: Boolean) {
         binding.apply {
             progressCircular.isVisible = loading
-            cardView.isEnabled = !loading
+            tilUsername.isEnabled = !loading
+            tilPassword.isEnabled = !loading
+            btnSignIn.isEnabled = !loading
         }
     }
 
@@ -68,11 +72,11 @@ class SignInFragment : Fragment(R.layout.fragment_signin) {
                 ResourceState.LOADING -> setLoading(true)
                 ResourceState.SUCCESS -> {
                     setLoading(false)
-                    it.data?.let { token ->
-                        settings.token = token
+                    it.data?.let { signIn ->
+                        settings.role = signIn.role[0].roleName
+                        settings.token = signIn.token
                         settings.signedIn = true
-                        showMessage("Login success!")
-                        TODO("navigate to main")
+                        navController.navigate(R.id.action_signInFragment_to_mainFragment)
                     }
                 }
                 ResourceState.ERROR -> {
