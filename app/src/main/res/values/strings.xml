@@ -39,4 +39,5 @@
     <string name="error_not_allowed">Sizge ruxsat etilmegen!</string>
     <string name="mtrl_picker_confirm">Saqlaw</string>
     <string name="mtrl_picker_cancel" translatable="false">Biykarlaw</string>
+    <string name="logout">Shıǵıw</string>
 </resources>
