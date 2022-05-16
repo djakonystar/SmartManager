@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import uz.texnopos.smartmanager.R
@@ -13,20 +15,24 @@ import uz.texnopos.smartmanager.core.extensions.showSuccess
 import uz.texnopos.smartmanager.core.extensions.showWarning
 import uz.texnopos.smartmanager.core.utils.ResourceState
 import uz.texnopos.smartmanager.databinding.FragmentAdminBinding
+import uz.texnopos.smartmanager.settings.Settings
 import uz.texnopos.smartmanager.ui.dialog.AddAdminDialog
 import uz.texnopos.smartmanager.ui.dialog.EditAdminDialog
 
 class AdminFragment : Fragment(R.layout.fragment_admin) {
     private lateinit var binding: FragmentAdminBinding
-    private val addAdminDialog: AddAdminDialog by lazy { AddAdminDialog() }
+    private lateinit var navController: NavController
     private lateinit var editAdminDialog: EditAdminDialog
+    private val addAdminDialog: AddAdminDialog by lazy { AddAdminDialog() }
     private val viewModel: AdminViewModel by viewModel()
     private val adapter: AdminAdapter by inject()
+    private val settings: Settings by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentAdminBinding.bind(view)
+        navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
 
         binding.apply {
             swipeRefresh.setOnRefreshListener {
@@ -111,6 +117,12 @@ class AdminFragment : Fragment(R.layout.fragment_admin) {
                     }
                 }
                 addAdminDialog.setOnDismissListener { fabAddAdmin.isEnabled = true }
+            }
+
+            toolbar.setOnMenuItemClickListener {
+                settings.signedIn = false
+                navController.navigate(R.id.action_mainFragment_to_signInFragment)
+                true
             }
         }
 

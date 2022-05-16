@@ -5,6 +5,8 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.MaterialTimePicker.INPUT_MODE_CLOCK
 import com.google.android.material.timepicker.TimeFormat
@@ -22,6 +24,7 @@ import uz.texnopos.smartmanager.settings.Settings
 
 class SettingsFragment : Fragment(R.layout.fragment_settings) {
     private lateinit var binding: FragmentSettingsBinding
+    private lateinit var navController: NavController
     private val viewModel: SettingsViewModel by viewModel()
     private val settings: Settings by inject()
     private var startHour = ""
@@ -33,6 +36,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentSettingsBinding.bind(view)
+        navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
 
         binding.apply {
             if (settings.role == "ADMIN") {
@@ -142,6 +146,12 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                 } else {
                     tilChatId.error = getString(R.string.required_field)
                 }
+            }
+
+            toolbar.setOnMenuItemClickListener {
+                settings.signedIn = false
+                navController.navigate(R.id.action_mainFragment_to_signInFragment)
+                true
             }
         }
 

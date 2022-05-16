@@ -7,6 +7,8 @@ import android.view.View
 import android.widget.ArrayAdapter
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.google.android.material.datepicker.CalendarConstraints
 import com.google.android.material.datepicker.DateValidatorPointBackward
 import com.google.android.material.datepicker.MaterialDatePicker
@@ -20,13 +22,16 @@ import uz.texnopos.smartmanager.core.utils.CalendarHelper
 import uz.texnopos.smartmanager.core.utils.ResourceState
 import uz.texnopos.smartmanager.data.models.report.ReportDate
 import uz.texnopos.smartmanager.databinding.FragmentReportBinding
+import uz.texnopos.smartmanager.settings.Settings
 import java.text.SimpleDateFormat
 import java.util.*
 
 class ReportFragment : Fragment(R.layout.fragment_report) {
     private lateinit var binding: FragmentReportBinding
+    private lateinit var navController: NavController
     private val viewModel: ReportViewModel by viewModel()
     private val adapter: ReportAdapter by inject()
+    private val settings: Settings by inject()
     private val calendarHelper = CalendarHelper()
     private val simpleDateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.ROOT)
     private var dateFrom = calendarHelper.currentDate
@@ -42,6 +47,7 @@ class ReportFragment : Fragment(R.layout.fragment_report) {
         super.onViewCreated(view, savedInstanceState)
 
         binding = FragmentReportBinding.bind(view)
+        navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
         applyDate()
         resetSupervisor()
 
@@ -97,6 +103,12 @@ class ReportFragment : Fragment(R.layout.fragment_report) {
                 dateRangePicker.show(requireActivity().supportFragmentManager, dateRangePicker.tag)
                 fabDatePicker.isEnabled = false
             }
+
+            toolbar.setOnMenuItemClickListener {
+                settings.signedIn = false
+                navController.navigate(R.id.action_mainFragment_to_signInFragment)
+                return@setOnMenuItemClickListener true
+            }
         }
 
         viewModel.getReports(reportDate)
@@ -112,7 +124,6 @@ class ReportFragment : Fragment(R.layout.fragment_report) {
         binding.apply {
             progressCircular.isVisible = loading
             tilSupervisor.isEnabled = !loading
-            swipeRefresh.isEnabled = !loading
             recyclerView.isEnabled = !loading
             fabDatePicker.isEnabled = !loading
         }
