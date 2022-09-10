@@ -36,7 +36,7 @@ class AdminViewModel(private val api: ApiInterface, private val settings: Settin
                 .subscribe(
                     { response ->
                         if (response.success) {
-                            mutableAdmins.value = Resource.success(response.data!!)
+                            mutableAdmins.value = Resource.success(response.payload!!)
                         } else {
                             mutableAdmins.value = Resource.error(response.message)
                         }
@@ -57,7 +57,7 @@ class AdminViewModel(private val api: ApiInterface, private val settings: Settin
                 .subscribe(
                     { response ->
                         if (response.success) {
-                            mutableAddAdmin.value = Resource.success(response.data)
+                            mutableAddAdmin.value = Resource.success(response.payload)
                         } else {
                             mutableAddAdmin.value = Resource.error(response.message)
                         }
@@ -99,7 +99,7 @@ class AdminViewModel(private val api: ApiInterface, private val settings: Settin
                 .subscribe(
                     { response ->
                         if (response.success) {
-                            mutableDeleteAdmin.value = Resource.success(response.data)
+                            mutableDeleteAdmin.value = Resource.success(response.payload)
                         } else {
                             mutableDeleteAdmin.value = Resource.error(response.message)
                         }

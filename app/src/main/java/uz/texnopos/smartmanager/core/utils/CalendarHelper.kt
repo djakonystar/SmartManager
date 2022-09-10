@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class CalendarHelper {
-    private val simpleDateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.ROOT)
+    private val simpleDateFormat = SimpleDateFormat("yyy-MM-dd", Locale.ROOT)
     private val currentDateInMillis: Long
         get() = System.currentTimeMillis()
 

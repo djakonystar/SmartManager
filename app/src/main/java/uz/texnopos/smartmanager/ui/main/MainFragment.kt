@@ -27,7 +27,7 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         binding.apply {
             bottomNav.setupWithNavController(childNavController)
 
-            if (settings.role == "ADMIN") {
+            if (settings.role == "admin") {
                 bottomNav.menu.getItem(1).isEnabled = false
                 bottomNav.menu.getItem(1).setOnMenuItemClickListener {
                     showError(getString(R.string.error_not_allowed))

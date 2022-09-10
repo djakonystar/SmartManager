@@ -202,12 +202,12 @@ val String.changeDateFormat: String
             day = this.substring(8..9)
             month = this.substring(5..6)
             year = this.substring(0..3)
-            "$day.$month.$year"
+            "$year-$month-$day"
         } else {
             day = this.substring(0..1)
             month = this.substring(3..4)
             year = this.substring(6..9)
-            "$day/$month/$year"
+            "$year-$month-$day"
         }
     }
 
@@ -216,7 +216,7 @@ val String.parseDate: String
         val date = this
         val sdf = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSX", Locale.ROOT)
         val result = sdf.parse(date)
-        val newSdf = SimpleDateFormat("dd.MM.yyyy HH:mm:ss", Locale.ROOT)
+        val newSdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ROOT)
         newSdf.timeZone = TimeZone.getTimeZone("GMT+5:00")
         return newSdf.format(result ?: "")
     }

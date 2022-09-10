@@ -14,41 +14,41 @@ import uz.texnopos.smartmanager.data.models.user.AdminPost
 import uz.texnopos.smartmanager.data.models.user.Supervisor
 
 interface ApiInterface {
-    @POST("/auth/login")
+    @POST("api/v1/login")
     fun signIn(
         @Body signIn: SignInPost
     ): Observable<GenericResponse<SignIn>>
 
-    @PUT("/bot/editTime")
+    @PATCH("api/v1/bot/setting")
     fun editTime(
         @Header("Authorization") token: String,
         @Body editTime: EditTime
     ): Observable<GenericResponse<Any?>>
 
-    @PUT("/bot/editChatId")
+    @PUT("api/v1/bot/chatId")
     fun editChatId(
         @Header("Authorization") token: String,
         @Body editChatId: EditChatId
     ): Observable<GenericResponse<Any?>>
 
-    @GET("/bot/getRule")
+    @GET("api/v1/bot/setting")
     fun getRule(
         @Header("Authorization") token: String,
-    ): Observable<GenericResponse<Rule>>
+    ): Observable<GenericResponse<List<Rule>>>
 
-    @GET("/bot/getAllSupervisor")
+    @GET("api/v1/getAllSupervisor")
     fun getSupervisors(
         @Header("Authorization") token: String,
     ): Observable<GenericResponse<List<Supervisor>>>
 
-    @GET("/bot/byDate")
+    @GET("api/v1/byDate")
     fun getReportsByDate(
         @Header("Authorization") token: String,
         @Query("start") start: String,
         @Query("end") end: String
     ): Observable<GenericResponse<List<Report>>>
 
-    @GET("/bot/byDateSupervisor/{id}")
+    @GET("api/v1/byDateSupervisor/{id}")
     fun getSupervisorsReports(
         @Header("Authorization") token: String,
         @Path("id") id: Int,
@@ -56,25 +56,25 @@ interface ApiInterface {
         @Query("end") end: String
     ): Observable<GenericResponse<List<Report>>>
 
-    @GET("/user")
+    @GET("api/v1/user")
     fun getAdmins(
         @Header("Authorization") token: String,
     ): Observable<GenericResponse<List<Admin>>>
 
-    @POST("/user/addUser")
+    @POST("api/v1/user")
     fun addAdmin(
         @Header("Authorization") token: String,
         @Body admin: AdminPost
     ): Observable<GenericResponse<Any?>>
 
-    @PUT("/user/editUser/{id}")
+    @PUT("api/v1/editUser/{id}")
     fun editAdmin(
         @Header("Authorization") token: String,
         @Path("id") id: Int,
         @Body admin: AdminPost
     ): Observable<GenericResponse<Any?>>
 
-    @DELETE("/user/deleteUser/{id}")
+    @DELETE("api/v1/user/deleteUser/{id}")
     fun deleteAdmin(
         @Header("Authorization") token: String,
         @Path("id") id: Int

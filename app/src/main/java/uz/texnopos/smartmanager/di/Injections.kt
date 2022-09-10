@@ -19,7 +19,7 @@ import uz.texnopos.smartmanager.ui.settings.SettingsViewModel
 import uz.texnopos.smartmanager.ui.signin.SignInViewModel
 import java.util.concurrent.TimeUnit
 
-private const val baseUrl = "http://smartshop24.uz"
+private const val baseUrl = "http://199.19.72.116:3000/"
 private const val timeOut = 20L
 
 val networkModule = module {

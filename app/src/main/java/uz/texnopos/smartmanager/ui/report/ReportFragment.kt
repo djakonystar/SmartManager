@@ -17,6 +17,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import uz.texnopos.smartmanager.R
 import uz.texnopos.smartmanager.core.extensions.changeDateFormat
 import uz.texnopos.smartmanager.core.extensions.onClick
+import uz.texnopos.smartmanager.core.extensions.parseDate
 import uz.texnopos.smartmanager.core.extensions.showError
 import uz.texnopos.smartmanager.core.utils.CalendarHelper
 import uz.texnopos.smartmanager.core.utils.ResourceState
@@ -33,7 +34,7 @@ class ReportFragment : Fragment(R.layout.fragment_report) {
     private val adapter: ReportAdapter by inject()
     private val settings: Settings by inject()
     private val calendarHelper = CalendarHelper()
-    private val simpleDateFormat = SimpleDateFormat("dd.MM.yyyy", Locale.ROOT)
+    private val simpleDateFormat = SimpleDateFormat("yyy-MM-dd", Locale.ROOT)
     private var dateFrom = calendarHelper.currentDate
     private var dateFromInLong = calendarHelper.currentDateMillis
     private var dateTo = calendarHelper.currentDate
@@ -55,15 +56,15 @@ class ReportFragment : Fragment(R.layout.fragment_report) {
             actvSupervisor.threshold = 100
             actvSupervisor.setOnItemClickListener { _, _, i, _ ->
                 selectedSupervisorId = i
-                if (selectedSupervisorId == 0) viewModel.getReports(reportDate)
-                else viewModel.getSupervisorsReports(selectedSupervisorId, reportDate)
+                if (selectedSupervisorId == 0) viewModel.getReports(ReportDate(dateFrom,dateTo))
+                else viewModel.getSupervisorsReports(selectedSupervisorId, ReportDate(dateFrom,dateTo))
             }
 
             swipeRefresh.setOnRefreshListener {
                 swipeRefresh.isRefreshing = false
                 setLoading(false)
                 resetSupervisor()
-                viewModel.getReports(reportDate)
+                viewModel.getReports(ReportDate(dateFrom,dateTo))
             }
 
             recyclerView.adapter = adapter
@@ -92,8 +93,8 @@ class ReportFragment : Fragment(R.layout.fragment_report) {
                     dateTo = simpleDateFormat.format(dateToInLong)
 
                     applyDate()
-                    if (selectedSupervisorId == 0) viewModel.getReports(reportDate)
-                    else viewModel.getSupervisorsReports(selectedSupervisorId, reportDate)
+                    if (selectedSupervisorId == 0) viewModel.getReports(ReportDate(dateFrom,dateTo))
+                    else viewModel.getSupervisorsReports(selectedSupervisorId, ReportDate(dateFrom,dateTo))
                 }
 
                 dateRangePicker.addOnDismissListener {

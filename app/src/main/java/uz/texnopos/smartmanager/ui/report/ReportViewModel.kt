@@ -35,7 +35,7 @@ class ReportViewModel(private val api: ApiInterface, private val settings: Setti
                 .subscribe(
                     { response ->
                         if (response.success) {
-                            mutableReports.value = Resource.success(response.data!!)
+                            mutableReports.value = Resource.success(response.payload!!)
                         } else {
                             mutableReports.value = Resource.error(response.message)
                         }
@@ -56,7 +56,7 @@ class ReportViewModel(private val api: ApiInterface, private val settings: Setti
                 .subscribe(
                     { response ->
                         if (response.success) {
-                            mutableSupervisors.value = Resource.success(response.data!!)
+                            mutableSupervisors.value = Resource.success(response.payload!!)
                         } else {
                             mutableSupervisors.value = Resource.error(response.message)
                         }
@@ -77,7 +77,7 @@ class ReportViewModel(private val api: ApiInterface, private val settings: Setti
                 .subscribe(
                     { response ->
                         if (response.success) {
-                            mutableSupervisorsReports.value = Resource.success(response.data!!)
+                            mutableSupervisorsReports.value = Resource.success(response.payload!!)
                         } else {
                             mutableSupervisorsReports.value = Resource.error(response.message)
                         }

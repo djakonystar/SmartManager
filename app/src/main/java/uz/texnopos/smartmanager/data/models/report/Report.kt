@@ -6,6 +6,5 @@ data class Report(
     val id: Int,
     val url: String,
     val date: String,
-    val supervisor: Supervisor,
-    val messageId: String
+    val supervisor: Supervisor?,
 )

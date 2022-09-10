@@ -73,8 +73,8 @@ class SignInFragment : Fragment(R.layout.fragment_signin) {
                 ResourceState.SUCCESS -> {
                     setLoading(false)
                     it.data?.let { signIn ->
-                        settings.role = signIn.role[0].roleName
-                        settings.token = signIn.token
+                        settings.role = signIn.payload!!.role
+                        settings.token = signIn.payload!!.token
                         settings.signedIn = true
                         navController.navigate(R.id.action_signInFragment_to_mainFragment)
                     }

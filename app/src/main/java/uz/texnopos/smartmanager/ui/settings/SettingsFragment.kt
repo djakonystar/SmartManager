@@ -39,7 +39,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         navController = Navigation.findNavController(requireActivity(), R.id.nav_host_fragment)
 
         binding.apply {
-            if (settings.role == "ADMIN") {
+            if (settings.role == "admin") {
                 tilChatId.isVisible = false
                 ivApplyChatId.isVisible = false
             }
@@ -175,28 +175,31 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                 ResourceState.LOADING -> setLoading(true)
                 ResourceState.SUCCESS -> {
                     setLoading(false)
-                    it.data?.let { rule ->
+                    it.data?.payload.let { r ->
                         binding.apply {
-                            startHour = rule.startHour.formatTime()
-                            startMinute = rule.startMinute.formatTime()
-                            endHour = rule.endHour.formatTime()
-                            endMinute = rule.endMinute.formatTime()
+                            r?.forEach { rule->
+                                startHour = rule?.startHour.toString().formatTime()
+                                startMinute = rule?.startMinute.toString().formatTime()
+                                endHour = rule?.endHour.toString().formatTime()
+                                endMinute = rule?.endMinute.toString().formatTime()
 
-                            etTimeRange.setText(
-                                getString(
-                                    R.string.time_range_template,
-                                    startHour,
-                                    startMinute,
-                                    endHour,
-                                    endMinute
+                                etTimeRange.setText(
+                                    getString(
+                                        R.string.time_range_template,
+                                        startHour,
+                                        startMinute,
+                                        endHour,
+                                        endMinute
+                                    )
                                 )
-                            )
-                            etChatId.setText(rule.chatId)
-                            tvSendTimeMessage.text = getString(
-                                R.string.send_time_message,
-                                rule.sendHour.formatTime(),
-                                rule.sendMinute.formatTime()
-                            )
+                                etChatId.setText(rule?.chatId.toString())
+                                tvSendTimeMessage.text = getString(
+                                    R.string.send_time_message,
+                                    rule?.sendHour.toString().formatTime(),
+                                    rule?.sendMinute.toString().formatTime()
+                                )
+                            }
+
                         }
                     }
                 }

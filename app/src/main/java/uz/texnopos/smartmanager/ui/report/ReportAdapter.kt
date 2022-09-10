@@ -19,11 +19,11 @@ class ReportAdapter : BaseAdapter<Report, ReportAdapter.ReportViewHolder>() {
             binding.apply {
                 tvFullname.text = itemView.context.getString(
                     R.string.full_name,
-                    report.supervisor.firstName ?: "",
-                    report.supervisor.lastName ?: ""
+                    report.supervisor?.firstName ?: "",
+                    report.supervisor?.lastName ?: ""
                 )
-                tvUsername.text = report.supervisor.username ?: ""
-                tvTime.text = report.date.parseDate
+                tvUsername.text = report.supervisor?.username ?: ""
+                tvTime.text = report.date
                 tvFullname.isSelected = true
                 tvUsername.isSelected = true
 

@@ -7,6 +7,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import uz.texnopos.smartmanager.core.utils.Resource
+import uz.texnopos.smartmanager.data.models.GenericResponse
 import uz.texnopos.smartmanager.data.models.bot.EditChatId
 import uz.texnopos.smartmanager.data.models.bot.EditTime
 import uz.texnopos.smartmanager.data.models.bot.Rule
@@ -17,8 +18,8 @@ class SettingsViewModel(private val api: ApiInterface, private val settings: Set
     ViewModel() {
     private val compositeDisposable = CompositeDisposable()
 
-    private var mutableRules: MutableLiveData<Resource<Rule>> = MutableLiveData()
-    val rules: LiveData<Resource<Rule>> = mutableRules
+    private var mutableRules: MutableLiveData<Resource<GenericResponse<List<Rule>>>> = MutableLiveData()
+    val rules: LiveData<Resource<GenericResponse<List<Rule>>>> = mutableRules
 
     private var mutableEditTime: MutableLiveData<Resource<Any?>> = MutableLiveData()
     val editTime: LiveData<Resource<Any?>> = mutableEditTime
@@ -35,7 +36,7 @@ class SettingsViewModel(private val api: ApiInterface, private val settings: Set
                 .subscribe(
                     { response ->
                         if (response.success) {
-                            mutableRules.value = Resource.success(response.data!!)
+                            mutableRules.value = Resource.success(response)
                         } else {
                             mutableRules.value = Resource.error(response.message)
                         }
@@ -56,7 +57,7 @@ class SettingsViewModel(private val api: ApiInterface, private val settings: Set
                 .subscribe(
                     { response ->
                         if (response.success) {
-                            mutableEditTime.value = Resource.success(response.data)
+                            mutableEditTime.value = Resource.success(response.payload)
                         } else {
                             mutableEditTime.value = Resource.error(response.message)
                         }
@@ -77,7 +78,7 @@ class SettingsViewModel(private val api: ApiInterface, private val settings: Set
                 .subscribe(
                     { response ->
                         if (response.success) {
-                            mutableEditChatId.value = Resource.success(response.data)
+                            mutableEditChatId.value = Resource.success(response.payload)
                         } else {
                             mutableEditChatId.value = Resource.error(response.message)
                         }

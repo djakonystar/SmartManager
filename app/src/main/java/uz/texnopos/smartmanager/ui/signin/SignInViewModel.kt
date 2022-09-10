@@ -8,6 +8,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import uz.texnopos.smartmanager.core.utils.Resource
+import uz.texnopos.smartmanager.data.models.GenericResponse
 import uz.texnopos.smartmanager.data.models.signin.SignIn
 import uz.texnopos.smartmanager.data.models.signin.SignInPost
 import uz.texnopos.smartmanager.data.remote.ApiInterface
@@ -17,8 +18,8 @@ class SignInViewModel(private val api: ApiInterface, application: Application) :
 
     private val compositeDisposable = CompositeDisposable()
 
-    private var mutableSignIn: MutableLiveData<Resource<SignIn>> = MutableLiveData()
-    val signIn: LiveData<Resource<SignIn>> = mutableSignIn
+    private var mutableSignIn: MutableLiveData<Resource<GenericResponse<SignIn>>> = MutableLiveData()
+    val signIn: LiveData<Resource<GenericResponse<SignIn>>> = mutableSignIn
 
     fun signIn(signIn: SignInPost) {
         mutableSignIn.value = Resource.loading()
@@ -29,7 +30,7 @@ class SignInViewModel(private val api: ApiInterface, application: Application) :
                 .subscribe(
                     { response ->
                         if (response.success) {
-                            mutableSignIn.value = Resource.success(response.data!!)
+                            mutableSignIn.value = Resource.success(response)
                         } else {
                             mutableSignIn.value = Resource.error(response.message)
                         }
